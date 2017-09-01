@@ -1,29 +1,32 @@
 # prettier-eslint for Emacs
 
-prettier-eslint is a function that formats the current buffer using [prettier-eslint](https://github.com/prettier/prettier-eslint). The
-package also exports a minor mode that applies `(prettier-eslint)` on save.
+prettier-eslint is a function that formats the current buffer using [prettier-eslint-cli](https://github.com/prettier/prettier-eslint-cli). The package also exports a minor mode that applies `(prettier-eslint)` on save.
 
 ## Configuration
 
+### Requirements
+
+`(prettier-eslint)` will only work on buffers attached to files that are part of a project that has the [`prettier-eslint-cli`](https://www.npmjs.com/package/prettier-eslint-cli) installed locally. This should be true if `prettier-eslint-cli` is included under `dependencies` or `devDependencies` in your project's `package.json`.
+
 ### Basic configuration
 
-First require the package:
-
-```elisp
-(require 'prettier-eslint)
-```
+1. Clone this repository.
+2. Add the repository's path (e.g. `~/.emacs.d/prettier-eslint-emacs`) to your `load-path`.
+  - i.e. `(add-to-list 'load-path "~/.emacs.d/prettier-eslint-emacs")`
+3. Require the package.
+  - `(require 'prettier-eslint)`
 
 Then you can hook to your favorite javascript mode:
 
 ```elisp
+(add-hook 'rjsx-mode-hook 'prettier-eslint-mode)
 (add-hook 'js2-mode-hook 'prettier-eslint-mode)
-(add-hook 'web-mode-hook 'prettier-eslint-mode)
 ...
 ```
 
-### Prettier arguments
+### prettier-eslint arguments
 
-To adjust the CLI args used for the prettier command, you can customize the `prettier-eslint-args` variable:
+To adjust the CLI args used for the prettier-eslint command, you can customize the `prettier-eslint-args` variable:
 
 ```elisp
 (setq prettier-eslint-args '(
